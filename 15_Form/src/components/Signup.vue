@@ -3,17 +3,48 @@ export default {
   name: "Signup",
   props: {},
   data() {
-    return {};
+    return {
+      error: [],
+      signup: {
+        fname: null,
+        lname: null,
+        subject: [],
+        gender: null,
+      },
+    };
   },
-  methods: {},
+  methods: {
+    signupUser() {
+      this.error = [];
+      if (this.signup.fname && this.signup.lname) {
+        console.warn("No Error!");
+      }
+      if (!this.signup.fname) {
+        this.error.push("Please enter first name");
+      }
+      if (!this.signup.lname) {
+        this.error.push("Please enter last name");
+      }
+      if (this.signup.subject.length < 1) {
+        this.error.push("Please Select at least one subject");
+      }
+      if (!this.signup.gender) {
+        this.error.push("Please select gender");
+      }
+      console.log(this.error);
+    },
+  },
 };
 </script>
 
-
 <template>
   <div>
-    <form class="signup">
-        <h2 id="heading">Admission Form</h2>
+    <div id="errordiv">
+      <p id="errorp" v-for="item in error" :key="item">{{ item }}</p>
+    </div>
+    <div id="formdiv">
+    <form class="signup" @submit.prevent v-on:submit="signupUser">
+      <h2 id="heading">Admission Form</h2>
       <div class="inputs">
         <input
           type="text"
@@ -21,6 +52,7 @@ export default {
           id="fname"
           class="field"
           placeholder="Enter First Name"
+          v-model="signup.fname"
         />
         <input
           type="text"
@@ -28,8 +60,11 @@ export default {
           id="lname"
           class="field"
           placeholder="Enter Last Name"
+          v-model="signup.lname"
         />
       </div>
+
+      <hr style="width: 100%" />
 
       <div class="subjects">
         <div>
@@ -38,12 +73,19 @@ export default {
             name="subject"
             id="C Language"
             value="C Language"
+            v-model="signup.subject"
           />
           <label for="C Language">C Language</label>
         </div>
 
         <div>
-          <input type="checkbox" name="subject" id="Java" value="Java" />
+          <input
+            type="checkbox"
+            name="subject"
+            id="Java"
+            value="Java"
+            v-model="signup.subject"
+          />
           <label for="Java">Java</label>
         </div>
 
@@ -53,6 +95,7 @@ export default {
             name="subject"
             id="JavaScript"
             value="JavaScript"
+            v-model="signup.subject"
           />
           <label for="JavaScript">JavaScript</label>
         </div>
@@ -60,15 +103,29 @@ export default {
 
       <div class="gender">
         <div>
-          <input type="radio" name="gender" id="male" value="male" />
+          <input
+            type="radio"
+            name="gender"
+            id="male"
+            value="male"
+            v-model="signup.gender"
+          />
           <label for="male">Male</label>
         </div>
 
         <div>
-          <input type="radio" name="gender" id="female" value="female" />
+          <input
+            type="radio"
+            name="gender"
+            id="female"
+            value="female"
+            v-model="signup.gender"
+          />
           <label for="female">Female</label>
         </div>
       </div>
+
+      <hr style="width: 100%" />
 
       <div class="buttons">
         <button type="submit" class="button" id="submit">Submit</button>
@@ -76,12 +133,18 @@ export default {
       </div>
     </form>
   </div>
+  </div>
 </template>
 
 <style >
-    #heading{
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+#heading {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#formdiv{
+  display: flex;
+  justify-content: center;
+}
 
 .signup {
   display: flex;
@@ -161,10 +224,35 @@ export default {
   filter: drop-shadow(0 0 2em #ff0000af);
 }
 
-.gender{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    margin: 10px;
+.gender {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 10px;
+}
+
+#errorp {
+  color: white;
+  background-color: rgb(255, 35, 35);
+  border: 1px solid rgb(255, 35, 35);
+  width: fit-content;
+  padding: 8px;
+  border-radius: 3px;
+  font-size: 15px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin: 20px 2px;
+  will-change: filter;
+}
+
+#errorp:hover {
+  cursor: pointer;
+  border: 1px solid white;
+  filter: drop-shadow(0 0 2em #ff0000af);
+}
+
+#errordiv {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 </style>
