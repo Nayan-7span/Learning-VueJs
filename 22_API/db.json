@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "name": "nayan",
+      "surname": "Padshala",
+      "gender": "male"
+    },
+    {
+      "name": "ronak",
+      "surname": "gondlaiya",
+      "gender": "male"
+    },
+    {
+      "name": "darshil",
+      "surname": "Dobariya",
+      "gender": "male"
+    },
+    {
+      "name": "Zarana",
+      "surname": "Zalavadiya",
+      "gender": "female"
+    }
+  ]
+}
