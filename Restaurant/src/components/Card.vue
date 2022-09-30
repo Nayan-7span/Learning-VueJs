@@ -1,23 +1,35 @@
 <script>
-import { string } from "yup/lib/locale";
+import { number, string } from "yup/lib/locale";
+import axios from "axios";
+import Loader from "./Loader.vue";
 export default {
-  name: "Card",
-  props: {
-    photo: string,
-    name: string,
-    address: string,
-    mobile: string,
-  },
-  data() {
-    return {
-      image: undefined,
-    };
-  },
-  mounted() {
-    let img = new Image();
-    img.src = this.photo;
-    this.image = img;
-  },
+    name: "Card",
+    props: {
+        photo: string,
+        name: string,
+        address: string,
+        mobile: string,
+        rest_id: number,
+        deleteRest: { type: Function }
+    },
+    data() {
+        return {
+            deleteLoading: false,
+            image: undefined,
+        };
+    },
+    methods: {
+        async deleteItem(id){
+          this.deleteLoading = true
+          this.deleteRest(id)
+        }
+    },
+    mounted() {
+        let img = new Image();
+        img.src = this.photo;
+        this.image = img;
+    },
+    components: { Loader }
 };
 </script>
 
@@ -25,7 +37,7 @@ export default {
   <div
     class="
       max-w-sm
-      rounded
+      rounded-lg
       p-2
       bg-white
       overflow-hidden
@@ -51,8 +63,11 @@ export default {
         📞 <p class="text-sm text-neutral-400 font-sans font-bold mx-1">{{ mobile }}</p>
       </div>
       <div class="p-1 flex items-center justify-end   w-[50%] rounded-full">
-            <button class="mx-1 bg-green-500 p-1 px-3 text-white  text-sm font-semibold rounded-full hover:bg-green-400 duration-200" >Edit</button>
-            <button class="mx-1 bg-red-500 p-1 px-2 text-white  text-sm font-semibold rounded-full hover:bg-red-400 duration-200">Delete</button>
+           
+            <button v-on:click="deleteItem(rest_id)" v-bind:class="`mx-1 ${deleteLoading ? 'bg-red-100': 'bg-red-500'} p-1 px-2 text-white  text-sm font-semibold rounded-full hover:bg-red-400 duration-200`">
+              <div v-if="deleteLoading"> <Loader :color="'red'" :size="'5px'"/></div>
+              <div v-else>delete</div>
+            </button>
       </div>
     </div>
   </div>

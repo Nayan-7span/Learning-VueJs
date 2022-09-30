@@ -1,5 +1,5 @@
 <template>
-    <div class="v-spinner" v-show="loading">
+    <div class="v-spinner flex items-center justify-center" v-show="loading">
         <div class="v-beat v-beat-odd" v-bind:style="spinnerStyle">
         </div><div class="v-beat v-beat-even" v-bind:style="spinnerStyle">
         </div><div class="v-beat v-beat-odd" v-bind:style="spinnerStyle">

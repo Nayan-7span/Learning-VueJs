@@ -10,19 +10,24 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@quasar/extras": "^1.15.3",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.1",
     "bootstrap-vue": "^2.22.0",
     "json-server": "^0.17.0",
+    "quasar": "^2.8.4",
     "vee-validate": "^4.6.9",
     "vue": "^3.2.39",
+    "vue-js-modal": "^2.0.1",
     "vue-router": "^4.1.5",
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@quasar/vite-plugin": "^1.2.3",
     "@vitejs/plugin-vue": "^3.1.0",
     "autoprefixer": "^10.4.12",
     "postcss": "^8.4.16",
+    "sass": "1.32.12",
     "tailwindcss": "^3.1.8",
     "vite": "^3.1.0"
   }
